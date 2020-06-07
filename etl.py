@@ -22,8 +22,12 @@ def main():
     conn = psycopg2.connect("host={} dbname={} user={} password={} port={}".format(*config['CLUSTER'].values()))
     cur = conn.cursor()
     
+    print('Extract data from S3 to Staging Tables')
+    print('Extracting full Song Data can take more than one hour ! Please be patient ...')
     load_staging_tables(cur, conn)
+    print('Transform & Load data to Facts and Dimensions Tables')
     insert_tables(cur, conn)
+    print('Sparkify ETL process completed !')
 
     conn.close()
 
