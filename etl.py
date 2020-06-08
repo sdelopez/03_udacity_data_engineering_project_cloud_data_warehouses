@@ -4,12 +4,28 @@ from sql_queries import copy_table_queries, insert_table_queries
 
 
 def load_staging_tables(cur, conn):
+    """ This function will copy eventts an songs data from S3 buckets to staging tables
+        using copy_table_queries (list defined in sql_queries.py)
+
+    :param cur: database cursor
+    :type cur: cursor
+    :param conn: database connection
+    :type conn: db connection
+    """
     for query in copy_table_queries:
         cur.execute(query)
         conn.commit()
 
 
 def insert_tables(cur, conn):
+    """ This function will insert eventts an songs data from staging tables to fact/dimension tables
+        using insert_table_queries (list defined in sql_queries.py)
+
+    :param cur: database cursor
+    :type cur: cursor
+    :param conn: database connection
+    :type conn: db connection
+    """
     for query in insert_table_queries:
         cur.execute(query)
         conn.commit()

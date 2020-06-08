@@ -4,12 +4,26 @@ from sql_queries import create_table_queries, drop_table_queries
 
 
 def drop_tables(cur, conn):
+    """ This function drops existing tables in sparkify database/datawarehouse
+
+    :param cur: database cursor
+    :type cur: cursor
+    :param conn: database connection
+    :type conn: db connection
+    """
     for query in drop_table_queries:
         cur.execute(query)
         conn.commit()
 
 
 def create_tables(cur, conn):
+    """ This function creates tables for sparkify database/datwarehouse
+
+    :param cur: database cursor
+    :type cur: cursor
+    :param conn: database connection
+    :type conn: db connection
+    """
     for query in create_table_queries:
         cur.execute(query)
         conn.commit()
